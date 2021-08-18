@@ -14,18 +14,19 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
 
-        get("/",((request, response) -> {
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+        if (process.environment().get("PORT") !=null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+        port(port);
+
+        get("/",(request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("Rangers", Ranger.all());
-            model.put("")
-        })
-    },new HandlebarsTemplateEngine());
+            return new ModelAndView(model,  "index.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 
-    private static ModelAndView handle(Request request, Response response) {
-        Map<String, Object> model = new HashMap<>();
-        model.put("Rangers", Ranger.all());
-        model.put("template", "templates/index.hbs");
-        return new ModelAndView(model, "index.hbs");
-    }
 }
