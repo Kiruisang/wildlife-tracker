@@ -1,4 +1,4 @@
-
+package models;
 
 import org.sql2o.Connection;
 import java.util.List;
@@ -14,6 +14,7 @@ public class EndangeredAnimal extends Animal{
         super(name);
         this.health = health;
         this.age = age;
+        this.type = TYPE;
 
         if(name.isEmpty() || health.isEmpty() || age.isEmpty()){
             throw new IllegalArgumentException("Some inputs are missing !");
